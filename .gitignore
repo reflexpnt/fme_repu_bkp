@@ -5,9 +5,11 @@ setting.py
 miDjangoProyecto/settings.py
 BKP_FILES/
 BKP_FILES/*
-#mysql_backups/BKP_SQL_script.py
-#mysql_backups/*
-#mysql_backups/*.sql
+mysql_backups/BKP_SQL_script.py
+mysql_backups/*
+mysql_backups/*.sql
+COMANDOS_n_Help/
+COMANDOS_n_Help/*
 
 
 
