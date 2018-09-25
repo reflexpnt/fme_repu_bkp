@@ -1,0 +1,134 @@
+
+
+_________________________________________________________________________________________________
+Se debe entrar el consola BASH y CARGAR LA VITUAL ENV Adecauda en la que se esta trabajando
+_________________________________________________________________________________________________
+
+
+BASH $> mysql -h user_name.mysql.pythonanywhere-services.com -u user_name 'user_name$BaseDatos1' -p --local-infile=1
+Enter password: Apodo + Lxxx + año
+
+
+
+mysql> show databases;
++-----------------------------+
+| Database                    |
++-----------------------------+
+| information_schema          |
+| user_name$BaseDatos1 |
+| ...   |
++-----------------------------+
+3 rows in set (0.53 sec)
+
+
+
+
+
+mysql> use user_name$BaseDatos1;
+Database changed
+
+
+
+
+mysql> show tables;
++---------------------------------------+
+| Tables_in_user_name$BaseDatos1 |
++---------------------------------------+
+| auth_group                            |
+| auth_group_permissions                |
+| auth_permission                       |
+| auth_user                             |
+| auth_user_groups                      |
+| auth_user_user_permissions            |
+| django_admin_log                      |
+| django_content_type                   |
+| django_migrations                     |
+| django_session                        |
+| repuestos_articulo                    |
++---------------------------------------+
+11 rows in set (0.00 sec)
+
+
+
+
+mysql> DESCRIBE repuestos_articulo;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| id             | int(11)      | NO   | PRI | NULL    | auto_increment |
+| numeroParte    | varchar(10)  | NO   |     | NULL    |                |
+| titulo         | varchar(200) | NO   |     | NULL    |                |
+| unidad         | varchar(3)   | NO   |     | NULL    |                |
+| observation    | varchar(200) | YES  |     | NULL    |                |
+| datasheet      | varchar(200) | YES  |     | NULL    |                |
+| EsActivo       | tinyint(1)   | NO   |     | NULL    |                |
+| EsVisible      | tinyint(1)   | NO   |     | NULL    |                |
+| TieneHojaDatos | tinyint(1)   | NO   |     | NULL    |                |
+| image          | varchar(100) | NO   |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+
+
+
+
+mysql> \W
+Show warnings enabled.
+mysql> \w
+Show warnings disabled.
+mysql> \W
+Show warnings enabled.
+mysql>
+
+
+
+
+
+LOAD DATA LOCAL INFILE '/home/user_name/miDjangoProyecto/test2.sql' INTO TABLE repuestos_articulo FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES (numeroParte
+,titulo,unidad);
+Query OK, 1 row affected (0.01 sec)
+Records: 1  Deleted: 0  Skipped: 0  Warnings: 0
+
+
+
+
+
+
+mysql> use user_name$BaseDatos1;
+Database changed
+mysql> \W
+Show warnings enabled.
+mysql> LOAD DATA LOCAL INFILE '/home/user_name/miDjangoProyecto/REPUESTOS_SAP_TODOS_v2.csv'
+INTO TABLE repuestos_articulo FIELDS TERMINATED BY ',' ENCLOSED BY '|' LINES TERMINATED BY '\n' IGNORE
+1 LINES (numeroParte,titulo,unidad,local);
+Query OK, 2598 rows affected (0.05 sec)
+Records: 2598  Deleted: 0  Skipped: 0  Warnings: 0
+mysql>
+
+
+
+
+
+
+
+
+
+
+LOAD DATA LOCAL INFILE "/home/user_name/miDjangoProyecto/test.sql" INTO TABLE repuestos_articulo FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+
+
+
+
+
+
+mysql> INSERT INTO repuestos_articulo (partNum,description,category,datasheet,observation,unit,image)
+ VALUES ("ARA293861","Pack de Bateria 12V Ion Litio p/ ECG","REPUESTOS","","Hawa","UN","pic_folder/no
+_image.png");
+
+
+mysql>  use user_name$BaseDatos1;
+
+mysql>  SHOW GRANTS FOR 'user_name'@'user_name.mysql.pythonanywhere-services.com';
+
+????  LOAD DATA INFILE 'Libro4.csv' INTO TABLE repuestos_articulo (image,partNum,description,unit,observation);
+
+SHOW TABLES;
+SELECT DATABASE();

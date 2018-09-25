@@ -1,0 +1,4 @@
+mysqldump -u user_name -h user_name.mysql.pythonanywhere-services.com 'user_name$BaseDatos1' > nombre_BKP.sql
+
+
+

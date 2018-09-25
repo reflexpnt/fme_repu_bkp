@@ -1,0 +1,95 @@
+(miVirtualFMC_1) 13:45 ~/miDjangoProyecto$ >git init
+(miVirtualFMC_1) 13:45 ~/miDjangoProyecto$ >git config --global user.name "Fresexxxxxxxxx"
+(miVirtualFMC_1) 13:45 ~/miDjangoProyecto$ >git config --global user.email "fernando.perez-ar@lalalla.com"
+(miVirtualFMC_1) 13:45 ~/miDjangoProyecto$ >git status
+...
+On branch master
+Initial commit
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        COMANDOS_n_Help/
+        REPUESTOS_SAP_TODOS_v2.csv
+        SAP_TODOS_BaseDatos1_v2_BKP.sql
+        manage.py
+...
+...
+(miVirtualFMC_1) 13:45 ~/miDjangoProyecto$ >git add --all
+
+
+
+
+...
+On branch master
+Initial commit
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   COMANDOS_n_Help/CMD to BKP la DB.txt
+        new file:   COMANDOS_n_Help/mysql.txt
+        new file:   REPUESTOS_SAP_TODOS_v2.csv
+        new file:   SAP_TODOS_BaseDatos1_v2_BKP.sql
+        new file:   manage.py
+...
+...
+
+(miVirtualFMC_1) 13:45 ~/miDjangoProyecto$ >git commit -m "First commit"
+
+
+
+...
+ create mode 100644 COMANDOS_n_Help/CMD to BKP la DB.txt
+ create mode 100644 COMANDOS_n_Help/mysql.txt
+ create mode 100644 REPUESTOS_SAP_TODOS_v2.csv
+ create mode 100644 SAP_TODOS_BaseDatos1_v2_BKP.sql
+ create mode 100755 manage.py
+...
+...
+
+
+(miVirtualFMC_1) 13:45 ~/miDjangoProyecto (master)$  git remote add origin https://github.com/reflexpnt/FMC_SAP_EspTec.git   ( esto fue creado en GitHub como repo nueva)
+
+(miVirtualFMC_1) 13:45 ~/miDjangoProyecto (master)$ data
+
+...
+Username for 'https://github.com': githubuser
+Password for 'https://githubusert@github.com':
+Counting objects: 163, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (162/162), done.
+...
+
+
+
+delete remote branch
+
+$   git push --delete origin ver1
+
+_____________________________________________
+$ git push --delete <remote_name> <branch_name>
+$ git branch -d <branch_name>
+Note that in most cases the remote name is origin.
+
+Delete Local Branch
+To delete the local branch use one of the following:
+
+$ git branch -d branch_name
+$ git branch -D branch_name
+________________________________________________
+
+
+
+
+
+
+para crear new Branch
+git branch image_test
+git checkout image_test
+nano myfile2.txt
+git add myfile2.txt
+git commit -a -m "IMAGE_TEST_ firstCommit ok"
+git push -u origin  image_test
+Username for 'https://github.com': githubuser
+Password for 'https://githubusert@github.com':
+Counting objects: 5, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (2/2), done.
+
