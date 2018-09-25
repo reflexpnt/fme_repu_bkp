@@ -1,0 +1,3 @@
+zip -r /home/user_name/miDjangoProyecto.zip  /home/user_name/miDjangoProyecto/*
+
+python /home/user_name/miDjangoProyecto/mysql_backups/BKP_SQL_script.py

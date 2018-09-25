@@ -1,0 +1,17 @@
+reportlab  # para pdf
+
+
+
+pip install widget_tweaks
+'widget_tweaks',
+
+
+pip install django-import-export
+
+INSTALLED_APPS = (
+    ...
+    'import_export',
+)
+
+# for django-import-export LIB
+IMPORT_EXPORT_USE_TRANSACTIONS = True
