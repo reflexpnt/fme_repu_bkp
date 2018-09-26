@@ -1,0 +1,283 @@
+<html>
+    <head>
+        <title>Fresenius Lista Respuestos</title>
+
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/percentageBars.js"></script>
+
+<style>
+
+    table {
+        border-spacing: 0;
+        width: 1200px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        margin-left:auto;
+        margin-right:auto;
+        }
+
+    th {
+        cursor: pointer;
+        background-color: #80aaff
+    }
+
+    th, td {
+        text-align: left;
+        padding: 3px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    td.a {
+        font-size: 12px;
+    }
+
+
+
+
+    .lightRed {
+    background-color: #ff8080
+    }
+
+    .lightRed a {
+    color: #fff;
+    font-weight: bold;
+    }
+
+    .red {
+    background-color: #f00;
+    }
+
+    .dt-buttons {
+	margin-bottom: 10px;
+}
+.dt-buttons.btn-group{
+	float: left;
+	margin-right: 2%;
+}
+.dataTables_filter {
+	float: left;
+	margin-top: 4px;
+	margin-right: 2%;
+	text-align: left;
+}
+.dataTables_info {
+	float: right;
+}
+.dataTables_length{
+	float: right;
+	margin-top: 4px;
+	margin-left: 2%;
+}
+    </style>
+
+
+
+
+<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+
+
+
+
+
+        <script>
+
+             jQuery(document).ready(function($jquery) {
+                 $jquery('#postsTable').dataTable({
+                     "iDisplayLength": 10,
+                     "order": [[ 4, "desc" ]],
+
+                        "dom": '<"dt-buttons"Bfli>rtp',
+                        "fixedHeader": true,
+                        "buttons": [
+                                    'colvis',
+                                    'copyHtml5',
+                                    'csvHtml5',
+                                    'excelHtml5',
+                                    'pdfHtml5',
+                                    'print'
+                                    ],
+
+                     "ajax": {
+                         "processing": true,
+                         "url": "{% url 'ajax_posts' %}",
+                         "dataSrc": ""
+                     },
+
+
+
+                     "columns": [
+                             //{ "data": "pk" ,"render": function (data) {return '<a href="'+ data +'">'+ data +'</a>';}},
+                             { "data": "fields.numeroParte" ,"render": function (data) {return '<a target="_blank" rel="noopener noreferrer" href="../../media/pic_folder/'+ data +'.png"><img border="0"  src="../../media/pic_folder/'+ data +'.png" width="50" ></a>';}},
+                             { "data": "fields.numeroParte" ,  "width": "10%" ,"render": function (data ) {return '<a target="_blank" rel="noopener noreferrer" href="/sapnum/'+ data +'"><strong>'+ data +'</strong></a>';}   },
+                             // { "data": "pk" ,"render": function (data) {return '<a href="http://freseniusmedicalcare.pythonanywhere.com/pdf/'+ data +'/"><img border="0" alt="PDF" src=../media/datasheet.png width="20" ></a>';}},
+                             { "data": "fields.titulo" },
+                             { "data": "fields.unidad" },
+                             { "data": "fields.SYS_Prioridad" ,  "width": "5%"},
+
+                             { "data": "fields.SYS_ESTADO" ,  "render":  function (data) {
+
+                                 if ( (data == 'Inicial')  || (data == 'Inicial') )  {
+                                     return '<span style="background-color: powderblue"><strong>&nbsp;&nbsp;'+ data +'&nbsp;&nbsp;</strong></span>' ;
+                                            }
+
+                                 if ( (data == 'enEdicion')  || (data == 'enEdicion') )  {
+                                     return '<span style="background-color: rgba(255, 147, 71, 0.9);"><strong>&nbsp;&nbsp;'+ data +'&nbsp;&nbsp;</strong></span>' ;
+                                            }
+
+
+                                if ( (data == 'enRevision')  || (data == 'enRevision') )  {
+                                     return '<span style="color:#FFFFFF; background:#FF69B4"><strong>&nbsp;&nbsp;'+ data +'&nbsp;&nbsp;</strong></span>' ;
+                                            }
+
+                                if ( (data == 'Revisado')  || (data == 'Revisado') )  {
+                                     return '<span style="color:#FFFFFF; background:#9a54d3"><strong>&nbsp;&nbsp;'+ data +'&nbsp;&nbsp;</strong></span>' ;
+                                            }
+
+                                if ( (data == 'Aprobado')  || (data == 'Aprobado') )  {
+                                     return '<span style="color:#FFFFFF; background:#006600"><strong>&nbsp;&nbsp;'+ data +'&nbsp;&nbsp;</strong></span>' ;
+                                            }
+                                            else
+                                            {
+                                             return data ;
+                                            }
+
+                                 }},
+
+
+                            { "data": "fields.SYS_dataEntryAuthor" },
+
+                            //{ "data": "fields.imagen_pri" ,"render": function (data) {return '<a href="http://freseniusmedicalcare.pythonanywhere.com/media/'+ data +'"><img border="0"  src="http://freseniusmedicalcare.pythonanywhere.com/media/'+ data +'" width="50" ></a>';}},
+
+                            { "data": "pk" ,"render": function (data) {return '<a target="_blank" rel="noopener noreferrer" href="./pdf/'+ data +'/"><img border="0" alt="PDF" src=../media/datasheet.png width="20" ></a>';}},
+                            //{ "data": "pk" ,"render": function (data) {return '<a href="http://freseniusmedicalcare.pythonanywhere.com/art/'+ data +'/edit"><img border="0" alt="edit" src=../media/edit_icon2.png width="15" ></a>';}}
+                            { "data": "fields.numeroParte" ,  "width": "5%" ,"render": function (data ) {return '<a target="_blank" rel="noopener noreferrer" href="./sapnum/'+ data +'"><img border="0" alt="edit" src=../media/edit_icon2.png width="15" ></a>';}   }
+                         ]
+                 });
+             });
+         </script>
+
+
+
+
+    </head>
+
+
+
+
+    <body>
+
+      <input type="hidden" id="myVar" name="variable" value="{{articulo.numeroParte}}">
+
+    <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="http://freseniusmedicalcare.pythonanywhere.com/media/frese_logo.png" width="200" height="42" /></a>
+
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+
+          </li>
+          <li class="nav-item">
+
+          </li>
+          <li class="nav-item">
+
+          </li>
+        </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <ul><a class="navbar-brand" href="{% url 'index' %}"><img src="http://fme.pythonanywhere.com/media/user_icon.png" width="20" /></a>{{ user.get_username }}&nbsp;<a href="{% url 'logout'%}?next={{request.path}}">Salir</a></ul>
+
+            {% else %}
+            <ul><a href="{% url 'login'%}?next={{request.path}}">Ingresar</a></ul>
+            {% endif %}
+            </ul>
+
+        </div>
+    </nav>
+
+    <table style="height: 5px; width: 100%; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr >
+    <td   width=350px bgcolor ="#0000e6"><font color="white">&nbsp;&nbsp;Fresenius Lista Repuestos</td>
+    <td   width=750px bgcolor ="#0000e6"><font color="white"></td>
+    <td   align="left" bgcolor = "#0000e6"><font color="white">{{ articulosLOCAL_count }} articulos Locales de {{ articulos_count }} en DB</td>
+    </tr>
+
+    </tbody>
+    </table>
+
+
+<div><br><br></div>
+
+        <div class="container">
+            <table id="postsTable" class="table table-striped table-bordered" width="1200px"   border="0">
+                 <thead>
+                     <tr>
+                        <th> imagen </th>
+                        <th> SAP# </th>
+                        <th> Titulo </th>
+                        <th> Unidad </th>
+                        <th> Prioridad </th>
+                        <th> Estado </th>
+                        <th> Usuario </th>
+                        <th> PDF </th>
+                        <th> edit </th>
+                     </tr>
+                 </thead>
+                 <tbody></tbody>
+            </table>
+        </div>
+
+
+<div><br></div>
+
+
+    <!--FOOTER-->
+<footer class="container">
+	<div class="row">
+		<div class="col-12">
+			<p class="text-center">&copy; 2018 - <a href="http://fme.pythonanywhere.com/" target="_blank">Fresenius Medical Care</a></p>
+		</div>
+	</div>
+</footer>
+
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+
+
+
+<!-- JavaScript opcional -->
+	<!-- Primero jQuery, luego Popper.js, luego Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<script>
+		$(function () {
+		  $('[data-toggle="popover"]').popover();
+		  $('[data-toggle="tooltip"]').tooltip();
+		})
+	</script>
+
+
+    </body>
+</html>

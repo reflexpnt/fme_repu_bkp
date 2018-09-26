@@ -1,0 +1,401 @@
+   {% load i18n widget_tweaks %}
+
+    <head>
+        <title>Fresenius Lista Respuestos</title>
+
+    <style>
+
+    table {
+        border-spacing: 0;
+        width: 1200px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        margin-left:auto;
+        margin-right:auto;
+        }
+
+    th {
+        cursor: pointer;
+        background-color: #80aaff
+    }
+
+    th, td {
+        text-align: left;
+        padding: 3px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    td.a {
+        font-size: 12px;
+    }
+
+    </style>
+
+
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+
+    </head>
+
+
+
+
+
+    <body>
+  <!--      <ul class="sidebar-nav">
+        {% if user.is_authenticated %}
+        <li>User: {{ user.get_username }}</li>
+        <li><a href="{% url 'logout'%}?next={{request.path}}">Salir</a></li>
+        {% else %}
+        <li><a href="{% url 'login'%}?next={{request.path}}">Ingresar</a></li>
+        {% endif %}
+        </ul>-->
+
+
+<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="{% url 'index' %}"><img src=../../../media/frese_logo.png width="200" height="42" /></a>
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+
+      </li>
+      <li class="nav-item">
+
+      </li>
+      <li class="nav-item">
+
+      </li>
+    </ul>
+
+
+
+
+        <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <ul><a class="navbar-brand" href="{% url 'index' %}"><img src=../../../media/user_icon.png width="20" /></a>{{ user.get_username }}&nbsp;<a href="{% url 'logout'%}?next={{request.path}}">Salir</a></ul>
+
+        {% else %}
+        <ul><a href="{% url 'login'%}?next={{request.path}}">Ingresar</a></ul>
+        {% endif %}
+        </ul>
+
+  </div>
+</nav>
+
+
+
+    <table style="height: 5px; width: 100%; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr >
+    <td   width=320px bgcolor ="#0000e6"><font color="white">&nbsp;&nbsp;</td>
+    <td   width=550px bgcolor ="#0000e6"><font color="white"></td>
+    <td bgcolor = "#0000e6"><font color="white"></td>
+    </tr>
+
+    </tbody>
+    </table>
+
+
+
+
+    <table class="w3-table-all" style="border: 0px solid #000;">
+    <thead>
+    <tr class="w3-pale-red" style="border: 0px solid #000;">
+    <th class="w3-left" style="border: 0px solid #000; "  >&nbsp;<h5 class="w3-opacity">&nbsp;&nbsp;&nbsp;&nbsp;Edición de Articulos</h5></th>
+    <th class="w3-center" style="border: 0px solid #00F;" width=680px>&nbsp;</th>
+
+    {% if articulo_instance.SYS_ESTADO == "Inicial" %}
+        <th style="border: 0px solid #000;"><strong>estado:&nbsp;</strong><span style="background-color: powderblue">&nbsp;&nbsp;&nbsp;{{ articulo_instance.SYS_ESTADO }}&nbsp;&nbsp;&nbsp;</span><p><font size="2">&nbsp;por&nbsp;[{{articulo_instance.SYS_dataEntryAuthor.username}}]</font></p></th>
+    {% endif %}
+    {% if articulo_instance.SYS_ESTADO == "enEdicion" %}
+        <th style="border: 0px solid #000;"><strong>estado:&nbsp;</strong><span style="background-color: rgba(255, 147, 71, 0.9);">&nbsp;&nbsp;&nbsp;{{ articulo_instance.SYS_ESTADO }}&nbsp;&nbsp;&nbsp;</span><p><font size="2">&nbsp;por&nbsp;[{{articulo_instance.SYS_dataEntryAuthor.username}}]</font></p></th>
+    {% endif %}
+    {% if articulo_instance.SYS_ESTADO == "Cerrado" %}
+        <th style="border: 0px solid #000;"><strong>estado:&nbsp;</strong><span style="background-color: rgba(60, 179, 113, 0.9);">&nbsp;&nbsp;&nbsp;{{ articulo_instance.SYS_ESTADO }}&nbsp;&nbsp;&nbsp;</span><p><font size="2">&nbsp;por&nbsp;[{{articulo_instance.SYS_dataEntryAuthor.username}}]</font></p></th>
+    {% endif %}
+    {% if articulo_instance.SYS_ESTADO == "Aprobado" %}
+        <th style="border: 0px solid #000;"><strong>estado:&nbsp;</strong><span style="background-color: rgba(106, 90, 205, 0.9);">&nbsp;&nbsp;&nbsp;{{ articulo_instance.SYS_ESTADO }}&nbsp;&nbsp;&nbsp;</span><p><font size="2">&nbsp;por&nbsp;[{{articulo_instance.SYS_dataEntryAuthor.username}}]</font></p></th>
+    {% endif %}
+
+
+
+    </tr>
+    </thead>
+    </table>
+
+    <div><br><br></div>
+
+
+
+
+
+
+
+
+<form class="form-horizontal" role="form" action="." method="post">
+    {% csrf_token %}
+
+    <table style="height: 5px; width: 1200px; margin-left: auto; margin-right: auto;" border="1" width="1200" cellspacing="0" cellpadding="3">
+    <tbody>
+    <tr >
+    <td   width=280px bgcolor ="#0000e6"><font color="white"><font size="5"><strong>{{ articulo_instance.numeroParte }}</strong></td>
+    <td   width=680px bgcolor ="#0000e6"><font color="white"><font size="5">&nbsp;{{ articulo_instance.titulo }}</td>
+    <td bgcolor = "#0000e6"><div class="form-group">
+        <div class="col-sm-offset-2 col-sm-12">
+            <button type="submit" name="btnsave" class="btn btn-primary">{% trans "Guardar" %}</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="submit" name="btnsaveandaprobe" class="btn btn-primary">{% trans "Enviar" %}</button>
+        </div>
+
+
+
+
+
+    </div></td>
+    </tr>
+
+    </tbody>
+    </table>
+
+    <div><br></div>
+
+    <table style="height: 5px; margin-left: auto; margin-right: auto;" border="1" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr>
+    <td style="width: 500px;" bgcolor="#d9d9d9"><strong>INFORMACI&Oacute;N PARA COMPRAS</strong></td>
+
+    <td style="width: 100px;" bgcolor="#d9d9d9" class="col-sm-4">Prioridad:{{ form.SYS_Prioridad |attr:"class:form-control " }}</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <div><br></div>
+
+    <table style="height: 96px; width: 1200px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="6">
+    <tbody>
+    <tr>
+    <td style="width: 10px;" bgcolor="#ffffff"><strong>Marca</strong></td>
+    <td style="width: 850px;" bgcolor="#ffffff"><div class="col-sm-6">{{ form.marca |attr:"class:form-control " }}</div></td>
+    <td style="width: 10px;" bgcolor="#ffffff"><strong>Reemplazable</strong></td>
+    <td align="center"  style="width: 20px;" bgcolor="#ffffff">{{ form.Reemplazable }}&nbsp;</td>
+    </tr>
+    <tr>
+    <td style="width: 10px;"  bgcolor="#ffffff"><strong>Mod./# Parte</strong></td>
+    <td style="width: 850px;" bgcolor="#ffffff"><div class="col-sm-6">{{ form.modelo_NumParte |attr:"class:form-control " }}</div></td>
+    <td style="width: 10px;"  bgcolor="#ffffff"><strong>Fab.a Pedido</strong></td>
+    <td align="center"  style="width: 20px;" bgcolor="#ffffff">{{ form.Fab_a_Pedido }}&nbsp;</td>
+    </tr>
+    <tr>
+    <td style="width: 10px;"  bgcolor="#ffffff"><strong>Linea</strong></td>
+    <td style="width: 850px;"  bgcolor="#ffffff"><div class="col-sm-6">{{ form.linea | attr:"class:form-control " }}</div></td>
+    <td style="width: 10px;"  bgcolor="#ffffff"><strong>Plano</strong></td>
+    <td align="center"  style="width: 20px;"   bgcolor="#ffffff">{{ form.Plano }}&nbsp;</td>
+    </tr>
+    <tr>
+    <td style="width: 10px;"  bgcolor="#ffffff"><strong>Comentarios</strong></td>
+    <td style="width: 850px;"  bgcolor="#ffffff"><div class="col-sm-11">{{ form.comentario | attr:"class:form-control " }}</div></td>
+    <td style="width: 10px;"  bgcolor="#ffffff"><strong>Unidad</strong></td>
+    <td align="center" style="width: 20px;"   bgcolor="#ffffff">&nbsp;[&nbsp;{{ articulo_instance.unidad }}&nbsp;]</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <div><br></div>
+
+
+
+    <table align="center" style="height: 5px; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr>
+    <td style="width: 597px;" bgcolor="#d9d9d9"><strong>DESCRIPCI&Oacute;N</strong></td>
+    </tr>
+    </tbody>
+    </table>
+
+
+    <table style="height: 300px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" cellspacing="0" cellpadding="15">
+    <tbody>
+    <tr >
+    <td width=5px >&nbsp;</td>
+    <td class="special" width=250px valign="center"><img src=../../../media/pic_folder/{{ articulo_instance.numeroParte }}.png width="250"  /></td>
+    <td width=5px >&nbsp;</td>
+    <td valign="center" align="left"><div class="form-group"><div class="col-sm-12">{{ form.Descripcion | attr:"class:form-control " }}</div></div></td>
+    </tr>
+    <tr >
+    <td >&nbsp;</td>
+    <td align="center" >{{ articulo_instance.numeroParte }}.png</td>
+    <td >&nbsp;</td>
+    <td >&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+
+
+    <div><br></div>
+
+
+    <table style="height: 26px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" cellspacing="0" cellpadding="4">
+    <tbody>
+    <tr>
+    <td style="width: 12px;" bgcolor="#d9d9d9">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#d9d9d9"><strong>CONTROLES / ENSAYOS</strong></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <td border="0" style="width: 1182px;" bgcolor="#ffffff"><div class="form-group"><div class="col-sm-12">{{ form.Ensayos | attr:"class:form-control " }}</div></div></td>
+
+    </tr>
+    </tbody>
+    </table>
+
+    <div><br></div>
+
+
+
+    <table style="height: 26px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" cellspacing="0" cellpadding="4">
+    <tbody>
+    <tr>
+    <td style="width: 12px;" bgcolor="#d9d9d9">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#d9d9d9"><strong>REFERENCIAS</strong></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <!--<td style="width: 1182px;" bgcolor="#ffffff">{{ form.Referencia1 }}</td>-->
+    <td style="width: 1182px;" bgcolor="#ffffff"><div class="col-sm-12">{{ form.Referencia1 | attr:"class:form-control " }}</div></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#ffffff"><div class="col-sm-12">{{ form.Referencia2 | attr:"class:form-control " }}</div></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#ffffff"><div class="col-sm-12">{{ form.Referencia3 | attr:"class:form-control " }}</div></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#ffffff"><div class="col-sm-12">{{ form.Referencia4 | attr:"class:form-control " }}</div></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#ffffff"><div class="col-sm-12">{{ form.Referencia5 | attr:"class:form-control " }}</div></td>
+    </tr>
+    </tbody>
+    </table>
+
+    <div><br></div>
+
+
+
+    <table style="height: 26px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" cellspacing="0" cellpadding="4">
+    <tbody>
+    <tr>
+    <td style="width: 12px;" bgcolor="#d9d9d9">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#d9d9d9"><strong>CONTROL DE CAMBIOS</strong></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#ffffff"></td>
+    </tr>
+    </tbody>
+    </table>
+    <table style="width: 1200px; height: 50px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="3">
+    <tbody>
+    <tr>
+    <td style="width: 10px;"   bgcolor="#ffffff"><strong>Rev.</strong></td>
+    <td style="width: 452px;"   bgcolor="#ffffff"><strong>Modificaci&oacute;n</strong></td>
+    <td style="width: 35px; text-align: center;"   bgcolor="#ffffff"><strong>Fecha</strong></td>
+    </tr>
+    <tr>
+    <td style="width: 10px; text-align: center;"   bgcolor="#ffffff" >00</td>
+    <td style="width: 452px;"   bgcolor="#ffffff">Emisi&oacute;n</td>
+    <td style="width: 35px;"   bgcolor="#ffffff">&nbsp;</td>
+    </tr>
+    <tr>
+    <td style="width: 10px;"   bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 452px;"   bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 35px;"   bgcolor="#ffffff">&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+
+
+    <div><br></div>
+
+
+    <table style="height: 4px; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr>
+    <td style="width: 603px;" bgcolor="#0000e6">&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <table style="height: 12px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" cellspacing="0" cellpadding="5">
+    <tbody>
+    <tr>
+    <td style="width: 10px;">&nbsp;</td>
+    <td style="width: 447px;"><strong>AR-PE-06-050 - Rev.00 - 15/06/2018</strong></td>
+    </tr>
+    </tbody>
+    </table>
+
+
+
+
+
+   <!--FOOTER-->
+<footer class="container">
+	<div class="row">
+		<div class="col-12">
+			<p class="text-center">&copy; 2018 - <a href="{% url 'index'%}" target="_blank">Fresenius Medical Care</a></p>
+		</div>
+	</div>
+</footer>
+
+
+
+
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+
+
+
+
+    {{ form.SYS_ESTADO }}
+
+
+</form>
+
+
+
+
+	<!-- JavaScript opcional -->
+	<!-- Primero jQuery, luego Popper.js, luego Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<script>
+		$(function () {
+		  $('[data-toggle="popover"]').popover();
+		  $('[data-toggle="tooltip"]').tooltip();
+		})
+	</script>
+</body>
+
+
+
+</html>

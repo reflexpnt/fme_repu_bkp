@@ -1,0 +1,122 @@
+{% block content %}
+
+<head>
+<link href="https:////maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https:////cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+<style>
+
+    body {
+  margin: 0;
+  padding: 0;
+  background-color: #e6f7ff;
+  height: 100vh;
+}
+#login .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  max-width: 400px;
+  height: 290px;
+  border: 1px solid #000080;
+  background-color: #f2f2f2;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+</style>
+
+
+
+
+</head>
+
+
+
+
+<body>
+
+{% if form.errors %}
+<p><font face="verdana" color="red">Los datos de Usuario y/o Clave no corresponden. Por favor intentar nuevamente.</font></p>
+{% endif %}
+
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p><font face="verdana" color="red">Su cuenta no tiene acceso a esta pagina. Por favor ingrese con una cuenta valida.</font></p>
+    {% else %}
+    <p><br></p>
+    {% endif %}
+{% endif %}
+
+
+<div><br></div>
+
+
+<div style="display: flex; justify-content: center;">
+  <img src="../../media/frese_logo.png" class="img-responsive" alt="" width="300"  height="63" />
+</div>
+<div><br></div>
+
+<table style="height: 5px; width: 100%; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr >
+    <td   width=350px bgcolor ="#0000e6"><font color="white">&nbsp;&nbsp;</td>
+    <td   width=750px bgcolor ="#0000e6"><font color="white"></td>
+    <td   align="left" bgcolor = "#0000e6"><font color="white"></td>
+    </tr>
+
+    </tbody>
+    </table>
+
+
+
+    <div id="login">
+        <h3 class="text-center text-white pt-5"></h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <h4 class="text-center text-info"><font color="#000080">Ingresar</h4>
+                            <div><br></div>
+                            <div class="form-group">
+                                <label for="username" class="text-info"><font color="#000080">usuario:</label><br>
+                                {{ form.username}}
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info"><font color="#000080">clave:</label><br>
+                                {{ form.password }}
+                            </div>
+
+                            <div>
+                                <input type="submit" value="Ingresar" />
+                                <input type="hidden" name="next" value="{{ next }}" />
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div><br></div>
+
+<footer class="container">
+	<div class="row">
+		<div class="col-12">
+			<p class="text-center">&copy; 2018 - <a href="{% url 'index' %}" target="_blank">Fresenius Medical Care</a></p>
+		</div>
+	</div>
+</footer>
+
+
+</body>
+{% endblock %}

@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+
+
+
+
+    <head>
+        <title>Fresenius Lista Respuestos</title>
+
+    <style>
+
+    table {
+        border-spacing: 0;
+        width: 1200px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        margin-left:auto;
+        margin-right:auto;
+        }
+
+    th {
+        cursor: pointer;
+        background-color: #80aaff
+    }
+
+    th, td {
+        text-align: left;
+        padding: 3px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    td.a {
+        font-size: 12px;
+    }
+
+    </style>
+
+
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+
+    </head>
+
+
+
+
+
+    <body>
+  <!--      <ul class="sidebar-nav">
+        {% if user.is_authenticated %}
+        <li>User: {{ user.get_username }}</li>
+        <li><a href="{% url 'logout'%}?next={{request.path}}">Salir</a></li>
+        {% else %}
+        <li><a href="{% url 'login'%}?next={{request.path}}">Ingresar</a></li>
+        {% endif %}
+        </ul>-->
+
+
+<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="{% url 'index' %}"><img src="http://freseniusmedicalcare.pythonanywhere.com/media/frese_logo.png" width="200" height="42" /></a>
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+
+      </li>
+      <li class="nav-item">
+
+      </li>
+      <li class="nav-item">
+
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+      <button  class="btn btn-outline-primary" type="submit">Buscar</button>
+
+    </form>
+
+
+        <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <ul><a class="navbar-brand" href="{% url 'index' %}"><img src="http://freseniusmedicalcare.pythonanywhere.com/media/user_icon.png" width="20" /></a>{{ user.get_username }}&nbsp;<a href="{% url 'logout'%}?next={{request.path}}">Salir</a></ul>
+
+        {% else %}
+        <ul><a href="{% url 'login'%}?next={{request.path}}">Ingresar</a></ul>
+        {% endif %}
+        </ul>
+
+  </div>
+</nav>
+
+
+
+
+
+
+    <!-- Navigation Bar -->
+
+<!-- <div class="container">
+      <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                    <div class="loginmodal-container">
+                        <h1>Inicio de Sesion</h1><br>
+                      <form action="" method="post">
+                            <input type="text" name="username" placeholder="Usuario" autofocus required>
+                            <input type="password" name="password" placeholder="Clave" required>
+                            <input type="submit" name="login" class="login loginmodal-submit" value="Ingresar">
+                      </form>
+
+
+                    </div>
+                </div>
+              </div>
+    </div>-->
+
+
+
+   <!-- <table style="height: 50px; margin-left: auto; margin-right: auto; width: 1200px;" border="0" cellspacing="0" cellpadding="5">
+    <tbody>
+    <tr>
+    <td width=200px><a href="{% url 'index' %}"><img src="http://reflexpnt.pythonanywhere.com/media/GUI_pictures/logoFresenius.jpg" width="200" height="42" /></a></td>
+    <td  align="center"   width=1000px></td>
+    <td valign="bottom"><strong>v0.1</strong></td>
+    </tr>
+    </tbody>
+    </table> -->
+
+    <table style="height: 5px; width: 100%; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr >
+    <td   width=350px bgcolor ="#0000e6"><font color="white">&nbsp;&nbsp;Fresenius Lista Repuestos</td>
+    <td   width=750px bgcolor ="#0000e6"><font color="white"></td>
+    <td   align="left" bgcolor = "#0000e6"><font color="white">{{ articulosLOCAL_count }} articulos Locales de {{ articulos_count }} en DB</td>
+    </tr>
+
+    </tbody>
+    </table>
+
+    <div></div><br>
+
+        <table  id="myTable" width="600px" class="tablesorter"  border="0" >
+       <thead>
+         <tr>
+
+
+           <th> imagen </th>
+           <th onclick="sortTable(1)"> SAP# </th>
+           <th onclick="sortTable(2)"> Titulo </th>
+           <th onclick="sortTable(3)"> Unidad </th>
+           <th onclick="sortTable(4)"> estado </th>
+           <th> PDF </th>
+           <th> edit </th>
+
+
+         </tr>
+       </thead>
+
+       <tbody >
+
+
+
+
+
+        {% for articulo in articulos|dictsort:"SYS_Prioridad" %}
+        <tr>
+
+
+
+            <!--<td><a href=""><img border="1" alt="imagen" src=../media/{{ articulo.image }} width="50" ></a></td>-->
+            <td><a href="../media/{{ articulo.imagen_pri }}"><img border="0" alt="imagen" src=../media/{{ articulo.imagen_pri }} width="50" ></a></td>
+            <td><h6><a href="{% url 'part_detail' pk=articulo.pk %}">{{ articulo.numeroParte }}</h6></a></td>
+            <td><p>{{ articulo.titulo }}</p></td>
+            <td><p>[ {{ articulo.unidad }} ]</p></td>
+            {% if articulo.SYS_ESTADO == "Inicial" %}
+                <td><p><span style="background-color: powderblue">&nbsp;&nbsp;{{ articulo.SYS_ESTADO }}&nbsp;&nbsp;</span></p></td>
+            {% endif %}
+            {% if articulo.SYS_ESTADO == "enEdicion" %}
+                <td><p><span style="background-color: rgba(255, 147, 71, 0.9);">&nbsp;{{ articulo.SYS_ESTADO }}&nbsp;</span></p></td>
+            {% endif %}
+            {% if articulo.SYS_ESTADO == "Cerrado" %}
+                <td><p><span style="background-color: rgba(60, 179, 113, 0.9);">&nbsp;&nbsp;{{ articulo.SYS_ESTADO }}&nbsp;&nbsp;</span></p></td>
+            {% endif %}
+            {% if articulo.SYS_ESTADO == "Aprobado" %}
+                <td><p><span style="background-color: rgba(106, 90, 205, 0.9);">&nbsp;&nbsp;{{ articulo.SYS_ESTADO }}&nbsp;</span></p></td>
+            {% endif %}
+            <td><a target="_blank" href="{% url 'part_pdf' pdf_art_id=articulo.pk %}"><img border="0" alt="PDF" src=../media/datasheet.png width="20" ></a></td>
+            <td><a target="_blank" href="{% url 'articulo_edit' pk=articulo.pk %}"><img border="0" alt="edit" src=../media/edit_icon2.png width="15" ></a></td>
+
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+     </table>
+
+
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+
+
+
+
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc";
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
+
+
+
+
+    <!--FOOTER-->
+<footer class="container">
+	<div class="row">
+		<div class="col-12">
+			<p class="text-center">&copy; 2018 - <a href="http://freseniusmedicalcare.pythonanywhere.com/" target="_blank">Fresenius Medical Care</a></p>
+		</div>
+	</div>
+</footer>
+	<!-- JavaScript opcional -->
+	<!-- Primero jQuery, luego Popper.js, luego Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<script>
+		$(function () {
+		  $('[data-toggle="popover"]').popover();
+		  $('[data-toggle="tooltip"]').tooltip();
+		})
+	</script>
+</body>
+
+
+
+</html>

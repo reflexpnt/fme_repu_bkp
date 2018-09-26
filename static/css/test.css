@@ -1,0 +1,218 @@
+/* tables */
+
+
+
+
+
+table.tablesorter {
+	font-family:arial;
+	//background-color: #00FF00;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 8pt;
+	width: 80%;
+	text-align: left;
+	margin-bottom: 12px; /* Add some space below the input */
+    margin-left : 120px; /* Add some space below the input */
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+	//background-color: #e6EEEE;
+	background-color:#b3ccff;
+	border: 2px solid #FFF;
+	font-size: 8pt;
+	padding: 4px;
+}
+table.tablesorter thead tr .header {
+
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td {
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.tablesorter tbody tr.odd td {
+	background-color:#F0F0F6;      //color_impares
+
+}
+table.tablesorter thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+background-color: #8dbdd8;
+
+}
+
+table.foobar {
+    	border: solid black 0px;
+    	border-spacing: 10px;
+    	margin-left : 320px; /* Add some space below the input */
+    	margin-top : 120px; /* Add some space below the input */
+    }
+    table.foobar td {
+    	border: solid black 0px;
+    }
+
+
+.padded tr.first td { padding-top:10px; }
+.padded tr.last td { padding-bottom:10px; }
+.padded td.first { padding-left:10px; }
+.padded td.last { padding-right:10px; }
+
+
+
+
+
+
+#myInput {
+    background-image: url('../../media/pic_folder/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 20%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 15px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+    margin-right : 120px; /* Add some space below the input */
+}
+
+#searchDescr {
+    background-image: url('../../media/pic_folder/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 20%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 15px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+    margin-right : 120px; /* Add some space below the input */
+}
+
+#logo {
+  float: left;
+  height: 78px;
+  width: 416px;
+  background: url("../../media/pic_folder/None/freseniusLogo3.png") no-repeat;
+  margin-top: 50px; /* Add some space below the input */
+  margin-bottom: 50px; /* Add some space below the input */
+  margin-left : 120px; /* Add some space below the input */
+  margin-right : 120px; /* Add some space below the input */
+}
+
+#element-1 {
+  float: left;
+  height: 78px;
+  width: 416px;
+  background: url("../../media/pic_folder/None/freseniusLogo3.png") no-repeat;
+  margin-top: 50px; /* Add some space below the input */
+  margin-bottom: 50px; /* Add some space below the input */
+  margin-left : 120px; /* Add some space below the input */
+  margin-right : 120px; /* Add some space below the input */
+}
+
+#barrita_header {
+  top: 170px;
+  height: 5px;
+  width: 80%;
+  background-color:#5c85d6;
+  position: absolute;
+  margin-top: 10px; /* Add some space below the input */
+  margin-bottom: 12px; /* Add some space below the input */
+  margin-left : 120px; /* Add some space below the input */
+  margin-right : 120px; /* Add some space below the input */
+}
+
+#barrita_gruesa_header {
+  top: 170px;
+  height: 20px;
+  width: 80%;
+  background-color:#5c85d6;
+  position: absolute;
+  margin-top: 10px; /* Add some space below the input */
+  margin-bottom: 12px; /* Add some space below the input */
+  margin-left : 120px; /* Add some space below the input */
+  margin-right : 120px; /* Add some space below the input */
+}
+
+
+#barrita_footer {
+  top: 5px;
+  height: 5px;
+  width: 80%;
+  background-color:#5c85d6;
+  position: relative;
+  margin-top: 10px; /* Add some space below the input */
+  margin-bottom: 12px; /* Add some space below the input */
+  margin-left : 120px; /* Add some space below the input */
+  margin-right : 120px; /* Add some space below the input */
+}
+
+#element-2 {
+  top: 102px;
+  height: 6px;
+  width: 774px;
+  background: url("../../media/pic_folder/None/freseniusLogo-02.png") no-repeat;
+  position: absolute;
+  left: 292px;
+}
+
+#element-3 {
+  top: 113px;
+  height: 45px;
+  width: 772px;
+  background: url("../../media/pic_folder/None/barra_fina.png") no-repeat;
+  position: absolute;
+  left: 293px;
+}
+
+#element-4 {
+  top: 176px;
+  height: 243px;
+  width: 262px;
+  background: url("../../media/pic_folder/None/barra_gruesa.png") no-repeat;
+  position: absolute;
+  left: 293px;
+}
+
+#element-5 {
+  top: 177px;
+  height: 31px;
+  width: 491px;
+  background: url("../../media/pic_folder/None/foto.png") no-repeat;
+  position: absolute;
+  left: 574px;
+}
+
+#element-6 {
+  top: 213px;
+  height: 89px;
+  width: 490px;
+  background: url("descripTitulo.png") no-repeat;
+  position: absolute;
+  left: 575px;
+}
+
+#element-7 {
+  top: 306px;
+  height: 21px;
+  width: 489px;
+  background: url("descripContenido.png") no-repeat;
+  position: absolute;
+  left: 576px;
+}
+
+#element-8 {
+  top: 330px;
+  height: 92px;
+  width: 488px;
+  background: url("ObsTitulo.png") no-repeat;
+  position: absolute;
+  left: 576px;
+}
