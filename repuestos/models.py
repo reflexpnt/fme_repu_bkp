@@ -29,8 +29,24 @@ STATUS_CHOICES = (
    )
 
 
+
+
+class Kit(models.Model):
+    kitNumSAP = models.CharField(max_length=15 , blank=False, default=""  )
+    #parte = models.ForeignKey( Articulo, related_name='parteAsociada',  blank=True, null=True , on_delete=models.PROTECT)
+    #parte = models.ForeignKey( Articulo)
+    cantidad = models.PositiveSmallIntegerField(  default=0)
+
+    def __str__(self):
+        return self.kitNumSAP
+    #def __unicode__(self):
+    #    return str(self.unit_number)
+
+
+
+
 class Articulo(models.Model):
-    SYS_local = models.BooleanField(  default=False)
+    SYS_local = models.BooleanField(  default=True)
     SYS_Prioridad = models.CharField(max_length=8, choices=PRIORITY_CHOICES, default='1')
     SYS_EsActivo = models.BooleanField(  default=True)
     SYS_EsVisible = models.BooleanField(   default=True)
@@ -79,21 +95,40 @@ class Articulo(models.Model):
     Referencia4 = models.CharField(max_length=250, blank=True, default="")
     Referencia5 = models.CharField(max_length=250, blank=True, default="")
 
-
+    partekit = models.ManyToManyField(Kit, help_text="Seleccione Articulos para este Kit")
 
 
     def __str__(self):
         return self.numeroParte
         #return [self.name.lower()]
 
-"""
-class Kit(models.Model):
-    #kitNumeroParte = models.CharField(max_length=15 , blank=False, default=""  )
-    parte = models.ForeignKey( Articulo, related_name='parteAsociada',  blank=True, null=True , on_delete=models.PROTECT)
-    #parte = models.ForeignKey( Articulo)
-    cantidad = models.PositiveSmallIntegerField(  default=0)
 
-    #def __str__(self):
-    #   return self.parte.numeroParte
-    #   #return self.parte
-"""
+class KitB(models.Model):
+    kitNumSAP_B = models.ForeignKey( Articulo, blank=True, on_delete=models.PROTECT)
+    #parte = models.ForeignKey( Articulo, related_name='parteAsociada',  blank=True, null=True , on_delete=models.PROTECT)
+    #parte = models.ForeignKey( Articulo)
+    nombre = models.CharField(max_length=15 , blank=False, default=""  )
+    cantidad_B = models.PositiveSmallIntegerField(  default=0)
+
+    def __str__(self):
+        return self.nombre
+
+
+
+
+class KitC(models.Model):
+    """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
+    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular book across whole library')
+    kitNumSAP_C = models.ForeignKey('Articulo', on_delete=models.SET_NULL, blank=True, null=True)
+    nombre_C    = models.CharField(max_length=200)
+    cantidad_C = models.PositiveSmallIntegerField(  default=0)
+
+
+    #return self.kitNumSAP_C.numeroParte
+    """
+    def __str__(self):
+
+        #return f'{self.id} ({self.book.title})'
+        #return self.nombre_C
+        return self.kitNumSAP_C.numeroParte
+    """

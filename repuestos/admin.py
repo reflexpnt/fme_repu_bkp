@@ -1,6 +1,8 @@
 from django.contrib import admin
 from .models import Articulo
-#from .models import Kit
+from .models import Kit
+from .models import KitB
+from .models import KitC
 
 #from django.contrib.auth.models import User
 #from . import models
@@ -8,12 +10,14 @@ from import_export.admin import  ImportExportMixin
 
 
 
-"""
-class KitInline(admin.TabularInline):
-    model = Kit
+
+class KitCInline(admin.TabularInline):
+    model = KitC
+    extra = 0
+    raw_id_fields = ("kitNumSAP_C",)
     #max_num = 10
 	#extra = 0
-"""
+
 
 #class ArticuloAdmin(admin.ModelAdmin ):
 class ArticuloAdmin(ImportExportMixin, admin.ModelAdmin  ):
@@ -25,11 +29,11 @@ class ArticuloAdmin(ImportExportMixin, admin.ModelAdmin  ):
     search_fields = ('numeroParte', 'titulo',  )
     list_filter = ('SYS_ESTADO','SYS_Prioridad','KIT','SYS_local','SYS_EsActivo', 'SYS_EsVisible', 'SYS_locked')
 
-    """
+
     inlines = [
-        KitInline,
+        KitCInline,
     ]
-    """
+
 
     """
     # como se mostraran los campos en la edicion (ADMIN) - los campos entre parentesis se muestran en horizontal
@@ -48,7 +52,7 @@ class ArticuloAdmin(ImportExportMixin, admin.ModelAdmin  ):
         }),
         ('Articulo Info', {
             'fields': ('numeroParte', ('titulo','unidad'),'Descripcion','imagen_Pri_Nombre','imagen_pri','marca','modelo_NumParte','linea','comentario',('Reemplazable','Fab_a_Pedido','Plano'),'Ensayos', \
-              'Referencia1','Referencia2','Referencia3','Referencia4','Referencia5')
+              'Referencia1','Referencia2','Referencia3','Referencia4','Referencia5','partekit')
         }),
     )
 
@@ -63,7 +67,6 @@ class ArticuloAdmin(ImportExportMixin, admin.ModelAdmin  ):
 
 ### =============================================================================================
 admin.site.register(Articulo, ArticuloAdmin )
-
-#admin.site.register(Kit)
-
-
+admin.site.register(Kit)
+admin.site.register(KitB)
+admin.site.register(KitC)
