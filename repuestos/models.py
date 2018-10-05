@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from tinymce import HTMLField
 
 # Create your models here.
 
@@ -72,7 +73,7 @@ class Articulo(models.Model):
     unidad = models.CharField(max_length=4, choices=UNIT_CHOICES, default='UN')
     Descripcion = models.TextField(max_length=1500, blank=True,  default="") # incrementar cantidad
 
-
+    content = HTMLField('Content',blank=True,  default=False)
 
     imagen_Pri_Nombre = models.CharField(max_length=250, default='no_image.png', blank=True )
     imagen_pri = models.ImageField(upload_to = './pic_folder/', default = './no_image.png', blank=True)

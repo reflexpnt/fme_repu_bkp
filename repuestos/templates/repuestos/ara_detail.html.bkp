@@ -1,0 +1,401 @@
+{% load i18n widget_tweaks %}
+
+<!doctype html>
+<html>
+
+
+    <head>
+        <title>Fresenius Lista Respuestos</title>
+
+    <style>
+
+    table {
+        border-spacing: 0;
+        width: 1200px;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        margin-left:auto;
+        margin-right:auto;
+        }
+
+    th {
+        cursor: pointer;
+        background-color: #80aaff
+    }
+
+    th, td {
+        text-align: left;
+        padding: 3px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    td.a {
+        font-size: 12px;
+    }
+
+    </style>
+
+
+    <link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+
+    </head>
+
+
+
+
+
+    <body>
+
+
+
+<nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="{% url 'index' %}"><img src=../../media/frese_logo.png width="200" height="42" /></a>
+
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+
+      </li>
+      <li class="nav-item">
+
+      </li>
+      <li class="nav-item">
+
+      </li>
+    </ul>
+
+
+
+
+        <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <ul><a class="navbar-brand" href="{% url 'index' %}"><img src=../../media/user_icon.png width="20" /></a>{{ user.get_username }}&nbsp;<a href="{% url 'logout'%}?next={{request.path}}">Salir</a></ul>
+
+        {% else %}
+        <ul><a href="{% url 'login'%}?next={{request.path}}">Ingresar</a></ul>
+        {% endif %}
+        </ul>
+
+  </div>
+</nav>
+
+
+
+
+    <table style="height: 5px; width: 100%; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr >
+    <td   width=320px bgcolor ="#0000e6"><font color="white">&nbsp;&nbsp;Especificaciones Técnicas</td>
+    <td   width=680px bgcolor ="#0000e6"><font color="white"></td>
+    <td bgcolor = "#0000e6"><font color="white">&nbsp;</td>
+    </tr>
+
+    </tbody>
+    </table>
+
+
+<div><br><br></div>
+<!-- test : {{ log_entry.user.username }}
+<div><br><br></div>-->
+
+    <table style="height: 5px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="3">
+    <tbody>
+    <tr >
+    <td   width=320px bgcolor ="#0000e6"><font color="white"><font size="6"><strong>{{ compo.numeroParte }}</strong></td>
+    <td   width=810px bgcolor ="#0000e6"><font color="white"><font size="6">{{ compo.titulo }}</td>
+
+
+
+
+    {% if compo.SYS_locked != True %}
+        <td align="center" valign="center" bgcolor = "#0000e6"> <div valign="bottom"><a href="{% url 'articulo_edit' pk=compo.pk %}"><img valign="bottom" border="0" alt="edit" src=../../media/edit_icon2_white.png width="28" ></a></div>&nbsp;</td>
+
+        {% else %}
+        <td align="center" valign="center" bgcolor = "#0000e6"> <div valign="bottom"><a href=""><img valign="bottom" border="0" alt="edit" src=../../media/no_edit_icon2_white.png width="28" ></a></div>&nbsp;</td>
+        {% endif %}
+    </tr>
+
+    </tbody>
+    </table>
+
+
+
+
+    <div><br>
+     </div>
+
+
+    <table style="height: 5px; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr>
+    <td style="width: 597px;" bgcolor="#d9d9d9"><strong>INFORMACI&Oacute;N PARA COMPRAS</strong></td>
+    </tr>
+    </tbody>
+    </table>
+
+
+    <div><br>
+     </div>
+
+
+<p>test: {{ compo.partekit }}</p>
+
+
+
+    <table style="height: 96px; width: 1200px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="6">
+    <tbody>
+    <tr>
+    <td style="width: 10px;"><strong>Marca</strong></td>
+    <td style="width: 687px;">{{ compo.marca }}</td>
+    <td style="width: 10px;"><strong>Reemplazable</strong></td>
+        {% if compo.Reemplazable ==  True %}
+            <td align="center" style="width: 10px;"><strong>SI</strong></td>
+        {% else %}
+            <td align="center" style="width: 10px;"><strong>NO</strong></td>
+        {% endif %}
+    </tr>
+    <tr>
+    <td style="width: 10px;"><strong>Mod./# Parte</strong></td>
+    <td style="width: 687px;">{{ compo.modelo_NumParte }}</td>
+    <td style="width: 10px;"><strong>Fab.a Pedido</strong></td>
+        {% if compo.Fab_a_Pedido ==  True %}
+            <td align="center" style="width: 10px;"><strong>SI</strong></td>
+        {% else %}
+            <td align="center" style="width: 10px;"><strong>NO</strong></td>
+        {% endif %}
+    </tr>
+    <tr>
+    <td style="width: 10px;"><strong>Linea</strong></td>
+    <td style="width: 687px;">{{ compo.linea }}</td>
+    <td style="width: 10px;"><strong>Plano</strong></td>
+        {% if compo.Plano ==  True %}
+            <td align="center" style="width: 50px;"><strong>SI</strong></td>
+        {% else %}
+            <td align="center" style="width: 50px;"><strong>NO</strong></td>
+        {% endif %}
+
+
+
+
+
+    </tr>
+    <tr>
+    <td style="width: 10px;"><strong>Comentarios</strong></td>
+    <td style="width: 657px;">{{ compo.comentario }}</td>
+    <td style="width: 20px;"><strong>Unidad</strong></td>
+    <td align="center" style="width: 50px;">&nbsp;[&nbsp;{{ compo.unidad }}&nbsp;]</td>
+    </tr>
+    </tbody>
+    </table>
+
+
+   <div><br>
+     </div>
+
+
+    <table align="center" style="height: 5px; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr>
+    <td style="width: 597px;" bgcolor="#d9d9d9"><strong>DESCRIPCI&Oacute;N</strong></td>
+    </tr>
+    </tbody>
+    </table>
+
+
+    <table style="height: 300px; width: 1200px; margin-left: auto; margin-right: auto; white-space: pre;" border="0" cellspacing="0" cellpadding="15">
+    <tbody>
+    <tr >
+    <td width=5px >&nbsp;</td>
+    <td class="special" width=300px valign="center"><img src=../../media/pic_folder/{{ compo.numeroParte }}.png width="300"  /></td>
+    <td width=5px >&nbsp;</td>
+
+    <td><div>{{ compo.Descripcion }}</div></td>
+
+    </tr>
+    <tr >
+    <td >&nbsp;</td>
+    <td align="center" >{{ compo.numeroParte }}.png</td>
+    <td >&nbsp;</td>
+    <td >&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+
+
+
+   <div><br>
+     </div>
+
+
+    <table style="height: 26px; width: 1200px; margin-left: auto; margin-right: auto;  white-space: pre; border="0" cellspacing="0" cellpadding="4">
+    <tbody>
+    <tr>
+    <td style="width: 12px;" bgcolor="#d9d9d9">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#d9d9d9"><strong>CONTROLES / ENSAYOS</strong></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#ffffff">{{ compo.Ensayos }}</td></tr>
+    </tbody>
+    </table>
+
+    <div><br>
+     </div>
+
+
+    <table style="height: 26px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" cellspacing="0" cellpadding="4">
+    <tbody>
+    <tr>
+    <td style="width: 12px;" bgcolor="#d9d9d9">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#d9d9d9"><strong>REFERENCIAS</strong></td>
+    </tr>
+
+
+
+    {% if compo.Referencia1 != "" %}
+        <tr>
+        <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+        <td style="width: 1182px;" bgcolor="#ffffff">{{ compo.Referencia1 }}</td>
+        </tr>
+    {% endif %}
+
+    {% if compo.Referencia2 != "" %}
+        <tr>
+        <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+        <td style="width: 1182px;" bgcolor="#ffffff">{{ compo.Referencia2 }}</td>
+        </tr>
+    {% endif %}
+
+    {% if compo.Referencia3 != "" %}
+        <tr>
+        <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+        <td style="width: 1182px;" bgcolor="#ffffff">{{ compo.Referencia3 }}</td>
+        </tr>
+    {% endif %}
+
+    {% if compo.Referencia4 != "" %}
+        <tr>
+        <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+        <td style="width: 1182px;" bgcolor="#ffffff">{{ compo.Referencia4 }}</td>
+        </tr>
+    {% endif %}
+
+    {% if compo.Referencia5 != "" %}
+        <tr>
+        <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+        <td style="width: 1182px;" bgcolor="#ffffff">{{ compo.Referencia5 }}</td>
+        </tr>
+    {% endif %}
+
+    </tbody>
+    </table>
+
+    <div><br>
+     </div>
+
+
+    <table style="height: 26px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" cellspacing="0" cellpadding="4">
+    <tbody>
+    <tr>
+    <td style="width: 12px;" bgcolor="#d9d9d9">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#d9d9d9"><strong>CONTROL DE CAMBIOS</strong></td>
+    </tr>
+    <tr>
+    <td style="width: 12px;" bgcolor="#ffffff">&nbsp;</td>
+    <td style="width: 1182px;" bgcolor="#ffffff"></td>
+    </tr>
+    </tbody>
+    </table>
+    <table style="width: 1200px; height: 50px; margin-left: auto; margin-right: auto;" border="1" cellspacing="0" cellpadding="3">
+    <tbody>
+    <tr>
+    <td style="width: 10px;"><strong>Rev.</strong></td>
+    <td style="width: 452px;"><strong>Modificaci&oacute;n</strong></td>
+    <td style="width: 35px; text-align: center;"><strong>Fecha</strong></td>
+    </tr>
+    <tr>
+    <td style="width: 10px; text-align: center;">00</td>
+    <td style="width: 452px;">Emisi&oacute;n</td>
+    <td style="width: 35px;">&nbsp;</td>
+    </tr>
+    <tr>
+    <td style="width: 10px;">&nbsp;</td>
+    <td style="width: 452px;">&nbsp;</td>
+    <td style="width: 35px;">&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+
+
+<div><br>
+     </div>
+
+    <table style="height: 4px; margin-left: auto; margin-right: auto;" border="0" width="1200" cellspacing="0" cellpadding="0">
+    <tbody>
+    <tr>
+    <td style="width: 603px;" bgcolor="#0000e6">&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <table style="height: 12px; width: 1200px; margin-left: auto; margin-right: auto;" border="0" cellspacing="0" cellpadding="5">
+    <tbody>
+    <tr>
+    <td style="width: 10px;">&nbsp;</td>
+    <td style="width: 447px;"><strong>AR-PE-06-050 - Rev.00 - 15/06/2018</strong></td>
+    </tr>
+    </tbody>
+    </table>
+
+
+
+{{ compo.content }}
+
+
+        <!--FOOTER-->
+<footer class="container">
+	<div class="row">
+		<div class="col-12">
+			<p class="text-center">&copy; 2018 - <a href="{% url 'index'%}" target="_blank">Fresenius Medical Care</a></p>
+		</div>
+	</div>
+</footer>
+
+
+
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+    <div><br><br>
+     </div>
+
+
+
+	<!-- JavaScript opcional -->
+	<!-- Primero jQuery, luego Popper.js, luego Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<script>
+		$(function () {
+		  $('[data-toggle="popover"]').popover();
+		  $('[data-toggle="tooltip"]').tooltip();
+		})
+	</script>
+
+</body>
+
+
+</html>

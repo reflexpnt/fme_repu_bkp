@@ -52,7 +52,7 @@ class ArticuloAdmin(ImportExportMixin, admin.ModelAdmin  ):
         }),
         ('Articulo Info', {
             'fields': ('numeroParte', ('titulo','unidad'),'Descripcion','imagen_Pri_Nombre','imagen_pri','marca','modelo_NumParte','linea','comentario',('Reemplazable','Fab_a_Pedido','Plano'),'Ensayos', \
-              'Referencia1','Referencia2','Referencia3','Referencia4','Referencia5','partekit')
+              'Referencia1','Referencia2','Referencia3','Referencia4','Referencia5','partekit','content')
         }),
     )
 

@@ -756,6 +756,18 @@ def part_pdf(request, pdf_art_id):
     p.setFont("Helvetica", 10)
     p.setStrokeColor(black)
     p.setFillColor(black)
+
+    #OBJ.Descripcion
+    # DESCRIP_TEXT_X , DESCRIP_TEXT_Y
+
+    #https://stackoverflow.com/questions/29971535/reportlab-unordered-list-not-showing-bullets
+    #{{script}}
+    #            notesWithBullets =  rml( content.body.replace('<li>', '&bull; ').replace('</p>','<br>').replace('</ul>','<br>').replace('</li>', '<br>'))
+    #{{endscript}}
+    #p.drawString((1 ) * cm, ( CONTROLES_BAR_Y -  CONTROLES_BAR_HEIGTH ) * cm,  notesWithBullets) #Referencia3
+    p.drawString((1 ) * cm, ( CONTROLES_BAR_Y -  CONTROLES_BAR_HEIGTH ) * cm,  OBJ.content) #Referencia3
+
+    #borra-------------------desde aqui
     if OBJ.Referencia1 != "" :
         REFERENCIAS_RENGLONES += 2
         p.drawString((MARGEN_IZQ ) * cm, ( REFERENCIAS_BAR_Y - (TEXTO_ROW_HEIGTH * REFERENCIAS_RENGLONES)  ) * cm,  OBJ.Referencia1) #Referencia1
@@ -775,6 +787,13 @@ def part_pdf(request, pdf_art_id):
     if OBJ.Referencia5 != "" :
         REFERENCIAS_RENGLONES  +=  1
         p.drawString((MARGEN_IZQ ) * cm, ( REFERENCIAS_BAR_Y - (TEXTO_ROW_HEIGTH * REFERENCIAS_RENGLONES)  ) * cm,  OBJ.Referencia5) #Referencia3
+
+    #borra------------------- hasta aqui
+
+
+
+
+
     #p.drawString((MARGEN_IZQ+GAP_TEXTO_IZQ+GAP_TEXTO_IZQ ) * cm, ( REFERENCIAS_BAR_Y - (TEXTO_ROW_HEIGTH * 4)  ) * cm,  OBJ.Referencia4) #Referencia4
     #p.drawString((MARGEN_IZQ+GAP_TEXTO_IZQ+GAP_TEXTO_IZQ ) * cm, ( REFERENCIAS_BAR_Y - (TEXTO_ROW_HEIGTH * 5)  ) * cm,  OBJ.Referencia5) #Referencia5
 
@@ -866,7 +885,8 @@ def part_pdf(request, pdf_art_id):
 
     # TABLA CONTROLES/ENSAYOS
     if OBJ.Descripcion != "" :
-        descripcion_data = Paragraph(OBJ.Descripcion, styleN)
+        #descripcion_data = Paragraph(OBJ.Descripcion, styleN)
+        descripcion_data = Paragraph(OBJ.content, styleN)
 
 
         data_table_DESC= [ [descripcion_data]]

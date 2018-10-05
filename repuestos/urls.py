@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^datatables', views.show, name='datatables'),
     url(r'^reporte/$', views.reporte, name='reporte'),
     url(r'^export/$', views.export, name='export'),
+    url(r'^tinymce/', include('tinymce.urls')),
 
 ]
 

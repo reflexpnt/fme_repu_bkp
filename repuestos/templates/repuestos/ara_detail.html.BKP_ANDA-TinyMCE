@@ -1,0 +1,54 @@
+{% load i18n widget_tweaks %}
+{% load static %}
+
+
+
+<!doctype html>
+<html>
+
+
+    <head>
+        <title>Fresenius Lista Respuestos</title>
+
+    <style>
+
+     </style>
+ </head>
+
+
+
+
+
+    <body>
+
+{{ compo.numeroParte }}
+
+
+    {{ form.media }}
+    <div class="row form-error">
+        <div class="column" id="content">
+            <form  method="post" action='' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p  }}
+                <input class="button" type="submit" value="Save">
+
+
+            <h3 > intanceTilte{{instance.title}} </h3>
+            <div> {{ instance.content | safe }}  </div>
+
+            <div> formPriori {{ form.SYS_Prioridad }}  </div>
+            <div> formContento {{ form.content }}  </div>
+
+                {{ form.content }}
+                {{ instance.content }}
+            </form>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+
+</html>
